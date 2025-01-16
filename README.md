@@ -1,5 +1,4 @@
-# TheCreator
-Trabalho de Programação e Desenvolvimento de Software 2
+
 # The CReator - Sistema de Gestão de Consumo Musical
 
 Este projeto, desenvolvido para a disciplina de Programação e Desenvolvimento de Software II da UFMG, visa analisar as preferências musicais de um usuário com base em suas músicas favoritas.  O sistema "The CReator" armazena informações sobre o usuário, suas músicas, artistas, gêneros e outros dados relevantes, como BPM, idioma e popularidade, para gerar um relatório detalhado do perfil musical.  O projeto é implementado em C++.
