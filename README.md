@@ -10,9 +10,9 @@ Este projeto, desenvolvido para a disciplina de Programação e Desenvolvimento 
   
 
 
-## Diagrama de Classes (UML)
+## Diagrama de Classe (UML)
 
-
+![Diagram de Classe](ClassDiagram.png)
 
 ## Classes
 
