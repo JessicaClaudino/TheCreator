@@ -8,9 +8,8 @@ Este projeto, desenvolvido para a disciplina de Programação e Desenvolvimento 
 
 * Cadastro de usuários e suas músicas favoritas.
 * Análise de BPM, idioma, gênero e popularidade das músicas.
-* Geração de playlists personalizadas.
-* Recomendação de músicas e artistas similares (em desenvolvimento).
-* Integração com serviços de streaming (em desenvolvimento).
+  
+
 
 ## Diagrama de Classes (UML)
 
@@ -18,7 +17,7 @@ Este projeto, desenvolvido para a disciplina de Programação e Desenvolvimento 
 
 ## Classes
 
-* **`Usuario`:** ... (descrição das classes - veja a resposta anterior)
+* **`Usuario`:** ... (descrição das classes )
 * ...
 
 ## Tecnologias Utilizadas
