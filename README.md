@@ -17,7 +17,7 @@ Este projeto, desenvolvido para a disciplina de Programação e Desenvolvimento 
 ## Classes
 
 * **`Usuario`:** ... (descrição das classes )
-* ...
+* *`Idioma`:** ....
 
 ## Tecnologias Utilizadas
 
