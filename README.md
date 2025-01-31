@@ -24,7 +24,7 @@ O diagrama UML do sistema está disponível no arquivo `_UML_diagrama_.png`. Ele
 
 O diagrama também mostra as relações entre as classes, indicando como elas se associam e colaboram para realizar as funcionalidades do sistema.
 
-
+![Diagrama UML](png)
 
 ## Como Executar o Sistema
 
