@@ -6,7 +6,7 @@
 
 ## Diagrama UML
 
-O diagrama UML do sistema está disponível no arquivo `_UML_diagram.png`. Ele mostra as seguintes classes principais:
+O diagrama UML do sistema está disponível no arquivo `_UML_diagrama_.png`. Ele mostra as seguintes classes principais:
 
 *   **`Usuario`**: Representa um usuário do sistema, com um nome e uma lista de músicas favoritas.
 *   **`Musica`**: Representa uma música, com atributos como nome, artista, ritmo (BPM), idioma, gênero e tempo.
