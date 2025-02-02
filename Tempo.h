@@ -1,8 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
-
-using namespace std;
+#include <stdexcept> // aqui pra poder usar excessoes 
 
 class Tempo {
 private:
@@ -15,11 +14,11 @@ public:
 
     int getMinutos() const;
     int getSegundos() const;
-    
+
     void setMinutos(int minutos);
     void setSegundos(int segundos);
     
-    string toString() const;
+    std::string toString() const;
 
     bool operator<(const Tempo& other) const;
     bool operator==(const Tempo& other) const;
