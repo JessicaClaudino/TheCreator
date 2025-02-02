@@ -1,33 +1,35 @@
-#pragma once
 #ifndef INTERFACEUSUARIO_H
 #define INTERFACEUSUARIO_H
 
-#include <iostream>
-#include <string>
-#include <vector>
-#include "Usuario.h"
 #include "NumeroGeneros.h"
 #include "NumeroArtistas.h"
 #include "RitmoMedio.h"
 #include "TempoMedio.h"
-#include "NumeroIdiomas.h" // Correção: incluir NumeroIdiomas.h (o nome estava errado antes)
-#include "Musica.h" // Incluir para usar Musica*
-
+#include "NumeroIdiomas.h"
+#include "Musica.h"
+#include "GerenciadorCSV.h"
+#include <string>
+#include <vector>
 class InterfaceUsuario {
-private:
-     NumeroGeneros numeroGeneros;
-     NumeroArtistas numeroArtistas;
-     RitmoMedio ritmoMedio;
-     TempoMedio tempoMedio;
-     NumeroIdiomas numeroIdiomas; // Correção: usar NumeroIdiomas
-
 public:
-    void exibirMenu();
-    void executarOpcao(const std::vector<int>& opcoes, const Usuario& usuario);
-    std::string obterNomeUsuario();
-    Musica* obterMusica();
-    std::vector<Musica*> obterMusicas(int numMusicas); // Recebe o número de músicas
-    void exibirResultados(const Usuario& usuario, const std::vector<int>& opcoes);
-};
+  InterfaceUsuario();
+  void exibirInformacoes();
+  void adicionarMusica(Musica* musica);
+ void carregarMusicasDeCSV(const std::string& filename);
+ void salvarMusicasEmCSV(const std::string& filename);
+  int getNumeroGeneros() const;
+   int getNumeroArtistas() const;
+   double getRitmoMedio() const;
+   double getTempoMedio() const;
+   int getNumeroIdiomas() const;
 
+
+private:
+  NumeroGeneros numeroGeneros;
+  NumeroArtistas numeroArtistas;
+  RitmoMedio ritmoMedio;
+  TempoMedio tempoMedio;
+  NumeroIdiomas numeroIdiomas;
+  std::vector<Musica*> musicas;
+};
 #endif
