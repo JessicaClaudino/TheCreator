@@ -1,13 +1,14 @@
-#include "NumeroIdioma.h"
+#include "NumeroIdiomas.h"
+#include <set>
 
-using namespace std;
+int NumeroIdiomas::calcularNumeroIdiomas(const std::vector<Musica*>& musicas) const {
+    std::set<std::string> idiomasUnicos;
 
-int NumeroIdioma::calcularNumeroIdioma(const vector<Musica>& musicas) {
-    set<string> idiomaEspecifico; 
-
-    for (const auto& musica : musicas) {
-        idiomaEspecifico.insert(musica.getIdioma());
+    for (const Musica* musica : musicas) {
+        if (musica != nullptr && musica->getIdioma() != nullptr) {
+            idiomasUnicos.insert(musica->getIdioma()->getNome());
+        }
     }
 
-    return static_cast<int>(idiomaEspecifico.size());
+    return idiomasUnicos.size();
 }
