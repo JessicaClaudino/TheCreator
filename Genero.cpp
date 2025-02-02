@@ -1,11 +1,25 @@
 #include "Genero.h"
 
-Genero::Genero(std::string genero) : genero(genero) {}
+using namespace std;
 
-std::string Genero::getGenero() const {
-    return genero;
+Genero::Genero(string nome) : nome(nome) {}
+
+string Genero::getNome() const {
+    return nome;
 }
 
-void Genero::setGenero(const std::string& genero) {
-    this->genero = genero;
+void Genero::setNome(const string& nome) {
+    this->nome = nome;
+}
+
+bool Genero::operator<(const Genero& other) const {
+    return nome < other.nome;
+}
+
+bool Genero::operator==(const Genero& other) const {
+    return nome == other.nome;
+}
+
+bool Genero::operator!=(const Genero& other) const { // Implementação do operador !=
+    return nome != other.nome;
 }
