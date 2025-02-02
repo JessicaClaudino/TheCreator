@@ -1,158 +1,70 @@
 #include "InterfaceUsuario.h"
 #include "Musica.h"
-#include "Artista.h"
-#include "Genero.h"
-#include "Ritmo.h"
-#include "Idioma.h"
-#include "Tempo.h"
-#include <limits>
-#include <sstream> // Para usar std::istringstream
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
 
-void InterfaceUsuario::exibirMenu() {
-    std::cout << "\nOpções de análise:" << std::endl;
-    std::cout << "1. Ver número de gêneros diferentes" << std::endl;
-    std::cout << "2. Ver número de artistas diferentes" << std::endl;
-    std::cout << "3. Ver ritmo médio das músicas" << std::endl;
-    std::cout << "4. Ver tempo médio das músicas" << std::endl;
-    std::cout << "5. Ver número de idiomas diferentes" << std::endl;
-    std::cout << "6. Ver todas as opções" << std::endl;
-    std::cout << "0. Sair" << std::endl;
-    std::cout << "Digite o número da(s) opção(ões) desejada(s), separadas por espaço: ";
+InterfaceUsuario::InterfaceUsuario() {}
+
+void InterfaceUsuario::exibirInformacoes() {
+    std::cout << "Número de gêneros diferentes: " << getNumeroGeneros() << std::endl;
+    std::cout << "Número de artistas diferentes: " << getNumeroArtistas() << std::endl;
+    std::cout << "Ritmo médio das músicas: " << getRitmoMedio() << std::endl;
+    std::cout << "Tempo médio das músicas: " << getTempoMedio() << std::endl;
+    std::cout << "Número de idiomas diferentes: " << getNumeroIdiomas() << std::endl;
 }
 
-void InterfaceUsuario::executarOpcao(const std::vector<int>& opcoes, const Usuario& usuario) {
-    for (int opcao : opcoes) {
-          switch (opcao) {
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-                exibirResultados(usuario, opcoes);
-                break;
-            case 0:
-                std::cout << "Saindo do sistema..." << std::endl;
-                 break;
-            default:
-                std::cout << "Opção inválida!" << std::endl;
-                 break;
+void InterfaceUsuario::adicionarMusica(Musica* musica) {
+    musicas.push_back(musica);
+}
+
+void InterfaceUsuario::salvarMusicasEmCSV(const std::string& filename) {
+    GerenciadorCSV::salvarMusicas(musicas, filename);
+}
+
+void InterfaceUsuario::carregarMusicasDeCSV(const std::string& filename) {
+    std::cout << "Tentando abrir arquivo: " << filename << std::endl;
+    std::ifstream file(filename);
+    if (file.is_open()) {
+        std::cout << "Arquivo " << filename << " aberto com sucesso." << std::endl;
+        std::string line;
+        std::getline(file, line); // Lê o cabeçalho
+        std::cout << "Cabeçalho: " << line << std::endl;
+        while (std::getline(file, line)) {
+            std::cout << "Lendo linha: " << line << std::endl;
+            try {
+                Musica musica = Musica::fromCSVString(line);
+                adicionarMusica(new Musica(musica));
+           }
+            catch(const std::exception& e){
+                 std::cerr << "Erro ao ler musica do csv: " << e.what() << std::endl;
             }
-          if(opcao == 0) break; //Se o usuário selecionar a opção 0, sai do loop.
+        }
+        file.close();
+        std::cout << "Músicas carregadas com sucesso de " << filename << std::endl;
+    } else {
+        std::cerr << "Erro ao abrir o arquivo para carregar: " << filename << std::endl;
     }
 }
 
-std::string InterfaceUsuario::obterNomeUsuario() {
-    std::string nome;
-    std::cout << "Por favor, digite seu nome: ";
-    std::getline(std::cin >> std::ws, nome);
-    return nome;
+
+int InterfaceUsuario::getNumeroGeneros() const {
+    return numeroGeneros.calcularNumeroGeneros(musicas);
 }
 
-Musica* InterfaceUsuario::obterMusica() {
-    std::string nomeMusica, nomeArtista, nomeGenero, nomeIdioma, tempoStr;
-    int bpm;
-
-    std::cout << "Digite o nome da música: ";
-    std::getline(std::cin >> std::ws, nomeMusica);
-
-    std::cout << "Digite o nome do artista: ";
-    std::getline(std::cin >> std::ws, nomeArtista);
-
-    std::cout << "Digite o gênero da música: ";
-    std::getline(std::cin >> std::ws, nomeGenero);
-
-    std::cout << "Digite o BPM da música: ";
-    while (!(std::cin >> bpm)) {
-        std::cout << "Entrada inválida. Digite um número inteiro para o BPM: ";
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    }
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-
-    std::cout << "Digite o idioma da música: ";
-    std::getline(std::cin >> std::ws, nomeIdioma);
-
-    std::cout << "Digite o tempo da música (min:seg): ";
-    std::getline(std::cin >> std::ws, tempoStr);
-
-
-    Artista* artista = new Artista(nomeArtista);
-    Genero* genero = new Genero(nomeGenero); // Use ponteiro para Genero
-    Ritmo* ritmo = new Ritmo(bpm);
-    Idioma* idioma = new Idioma(nomeIdioma); // Use ponteiro para Idioma
-
-    int minutos = std::stoi(tempoStr.substr(0, tempoStr.find(':')));
-    int segundos = std::stoi(tempoStr.substr(tempoStr.find(':') + 1));
-    Tempo* tempo = new Tempo(minutos, segundos);
-
-    return new Musica(nomeMusica, artista, genero, ritmo, idioma, tempo);
+int InterfaceUsuario::getNumeroArtistas() const {
+    return numeroArtistas.calcularNumeroArtistas(musicas);
 }
 
-std::vector<Musica*> InterfaceUsuario::obterMusicas(int numMusicas) {
-   std::vector<Musica*> musicas;
-    for (int i = 0; i < numMusicas; ++i) {
-        std::cout << "\nInserindo dados da música " << i + 1 << ":" << std::endl;
-        Musica* musica = obterMusica();
-        ritmoMedio.adicionarRitmo(*musica->getRitmo());
-        tempoMedio.adicionarTempo(*musica->getTempo());
-        musicas.push_back(musica);
-    }
-    return musicas;
+double InterfaceUsuario::getRitmoMedio() const {
+    return ritmoMedio.calcularRitmoMedio(musicas);
 }
 
-void InterfaceUsuario::exibirResultados(const Usuario& usuario, const std::vector<int>& opcoes) {
-    std::cout << "\nResultados para o usuário " << usuario.getNome() << ":" << std::endl;
+double InterfaceUsuario::getTempoMedio() const {
+    return tempoMedio.calcularTempoMedio(musicas);
+}
 
-    const std::vector<Musica*> musicas = usuario.getMusicasFavoritas();
-
-    for(int opcao : opcoes){
-        switch (opcao) {
-            case 1:
-               std::cout << "Número de gêneros diferentes: " << numeroGeneros.calcularNumeroGeneros(musicas) << std::endl;
-                break;
-            case 2:
-               std::cout << "Número de artistas diferentes: " << numeroArtistas.calcularNumeroArtistas(musicas) << std::endl;
-                break;
-            case 3: {
-                 try {
-                        double ritmoMedioCalculado = ritmoMedio.calcularRitmoMedio();
-                       std::cout << "Ritmo médio das músicas: " << ritmoMedioCalculado << " BPM" << std::endl;
-                 } catch (const std::invalid_argument& e) {
-                        std::cerr << "Erro ao calcular ritmo médio: " << e.what() << std::endl;
-                 }
-                  break;
-               }
-            case 4: {
-                try {
-                    double tempoMedioCalculado = tempoMedio.calcularTempoMedio();
-                   std::cout << "Tempo médio das músicas: " << tempoMedioCalculado << " segundos." << std::endl;
-                } catch (const std::invalid_argument& e) {
-                  std::cerr << "Erro ao calcular tempo médio: " << e.what() << std::endl;
-              }
-               break;
-             }
-            case 5:
-               std::cout << "Número de idiomas diferentes: " << numeroIdiomas.calcularNumeroIdiomas(musicas) << std::endl;
-              break;
-            case 6:
-               std::cout << "Número de gêneros diferentes: " << numeroGeneros.calcularNumeroGeneros(musicas) << std::endl;
-                std::cout << "Número de artistas diferentes: " << numeroArtistas.calcularNumeroArtistas(musicas) << std::endl;
-                try {
-                       double ritmoMedioCalculado = ritmoMedio.calcularRitmoMedio();
-                       std::cout << "Ritmo médio das músicas: " << ritmoMedioCalculado << " BPM" << std::endl;
-                 } catch (const std::invalid_argument& e) {
-                    std::cerr << "Erro ao calcular ritmo médio: " << e.what() << std::endl;
-                  }
-                try {
-                      double tempoMedioCalculado = tempoMedio.calcularTempoMedio();
-                    std::cout << "Tempo médio das músicas: " << tempoMedioCalculado << " segundos." << std::endl;
-                } catch (const std::invalid_argument& e) {
-                   std::cerr << "Erro ao calcular tempo médio: " << e.what() << std::endl;
-                 }
-               std::cout << "Número de idiomas diferentes: " << numeroIdiomas.calcularNumeroIdiomas(musicas) << std::endl;
-                 break;
-            }
-    }
+int InterfaceUsuario::getNumeroIdiomas() const {
+    return numeroIdiomas.calcularNumeroIdiomas(musicas);
 }
