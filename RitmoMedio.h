@@ -1,9 +1,8 @@
 #pragma once
 #include <vector>
-
-class Musica;
+  #include "Musica.h"
 
 class RitmoMedio {
 public:
-    static double calcular(const std::vector<Musica*>& musicas);
+    double calcularRitmoMedio(const std::vector<Musica*>& musicas) const;
 };
