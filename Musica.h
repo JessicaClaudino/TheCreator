@@ -1,3 +1,10 @@
+#ifndef MUSICA_H
+#define MUSICA_H
+
+#include <string>
+#include "Genero.h"
+#include "Artista.h"
+#include "Ritmo.h"
 #include "Idioma.h"
 #include "Tempo.h"
 
