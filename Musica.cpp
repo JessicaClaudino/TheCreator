@@ -1,69 +1,54 @@
 #include "Musica.h"
-#include <iostream> // para cout e endl
 
-using namespace std;
+Musica::Musica(std::string nome, Artista artista, Genero genero, Ritmo ritmo, Idioma idioma, Tempo tempo)
+    : nome(nome), artista(artista), genero(genero), ritmo(ritmo), idioma(idioma), tempo(tempo) {}
 
-Musica::Musica(string nome, string artista, Genero genero, int bpm, string idioma, string tempo)
-    : nome(nome), artista(artista), genero(genero), bpm(bpm), idioma(idioma), tempo(tempo) {}
-
-string Musica::getNome() const {
+std::string Musica::getNome() const {
     return nome;
 }
+void Musica::setNome(const std::string& nome) {
+    this->nome = nome;
+}
 
-string Musica::getArtista() const {
+Artista Musica::getArtista() const {
     return artista;
 }
-
-int Musica::getBpm() const {
-    return bpm;
-}
-
-string Musica::getIdioma() const {
-    return idioma;
+void Musica::setArtista(const Artista& artista) {
+    this->artista = artista;
 }
 
 Genero Musica::getGenero() const {
     return genero;
 }
-
-string Musica::getTempo() const {
-    return tempo;
+void Musica::setGenero(const Genero& genero) {
+    this->genero = genero;
 }
 
-void Musica::setNome(const string& nome) {
-    this->nome = nome;
+Ritmo Musica::getRitmo() const {
+    return ritmo;
+}
+void Musica::setRitmo(const Ritmo& ritmo) {
+    this->ritmo = ritmo;
 }
 
-void Musica::setArtista(const string& artista) {
-    this->artista = artista;
-}
 
-void Musica::setBpm(int bpm) {
-    this->bpm = bpm;
+Idioma Musica::getIdioma() const {
+    return idioma;
 }
-
-void Musica::setIdioma(const string& idioma) {
+void Musica::setIdioma(const Idioma& idioma) {
     this->idioma = idioma;
 }
 
-void Musica::setGenero(const Genero& genero) {
-   this->genero = genero;
+Tempo Musica::getTempo() const {
+    return tempo;
 }
-
-void Musica::setTempo(const string& tempo) {
+void Musica::setTempo(const Tempo& tempo) {
     this->tempo = tempo;
 }
-bool Musica::operator<(const Musica& other) const {
-   if (nome != other.nome) {
-        return nome < other.nome;
-    }
-    if(artista!=other.artista) return artista < other.artista;
-    if(genero!=other.genero) return genero < other.genero;
-    if(bpm!=other.bpm) return bpm < other.bpm;
-    if(idioma!=other.idioma) return idioma < other.idioma;
-    return tempo < other.tempo;
-}
 
-bool Musica::operator==(const Musica& other) const {
-    return nome == other.nome && artista == other.artista && genero == other.genero && bpm == other.bpm && idioma == other.idioma && tempo == other.tempo;
+bool Musica::operator<(const Musica& other) const {
+    return nome < other.nome;
+}
+bool Musica::operator==(const Musica& other) const{
+    return nome == other.nome;
 }
