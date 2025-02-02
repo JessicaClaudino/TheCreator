@@ -1,11 +1,14 @@
 #include "NumeroGeneros.h"
-#include "Musica.h"
 #include <set>
 
-int NumeroGeneros::calcularNumeroGeneros(const std::vector<Musica*>& musicas) {
-    std::set<std::string> generosDistintos;
+int NumeroGeneros::calcularNumeroGeneros(const std::vector<Musica*>& musicas) const {
+    std::set<std::string> generosUnicos;
+
     for (const Musica* musica : musicas) {
-       generosDistintos.insert(musica->getGenero().getGenero());
+        if (musica != nullptr && musica->getGenero() != nullptr) {
+            generosUnicos.insert(musica->getGenero()->getNome());
+        }
     }
-    return generosDistintos.size();
+
+    return generosUnicos.size();
 }
