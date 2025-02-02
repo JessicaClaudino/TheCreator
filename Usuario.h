@@ -1,4 +1,6 @@
-#pragma once
+#ifndef USUARIO_H
+#define USUARIO_H
+
 #include <string>
 #include <vector>
 #include "Musica.h"
@@ -6,16 +8,15 @@
 using namespace std;
 
 class Usuario {
-public:
+private:
     string nome;
-    vector<Musica> musicasFavoritas;
+    std::vector<Musica*> musicasFavoritas;
 
+public:
     Usuario(string nome);
-    Usuario() = default;
-
     string getNome() const;
-    void setNome(const string& nome);
-    
-    void adicionarMusicaFavorita(const Musica& musica);
-    vector<Musica> listarMusicasFavoritas() const;
+    void setMusicasFavoritas(const std::vector<Musica*>& musicas);
+     const std::vector<Musica*> &getMusicasFavoritas() const;
 };
+
+#endif
