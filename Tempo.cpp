@@ -1,6 +1,8 @@
 #include "Tempo.h"
 #include <stdexcept>
-#include <sstream> // Para usar stringstream
+#include <sstream>
+#include <iomanip>
+
 
 Tempo::Tempo(int minutos, int segundos) {
     if (minutos < 0 || segundos < 0 || segundos > 59) {
@@ -10,7 +12,7 @@ Tempo::Tempo(int minutos, int segundos) {
     this->segundos = segundos;
 }
 
-Tempo::Tempo() : minutos(0), segundos(0) {}
+Tempo::Tempo() : minutos(0), segundos(0) {} // Construtor padrão
 
 int Tempo::getMinutos() const {
     return minutos;
