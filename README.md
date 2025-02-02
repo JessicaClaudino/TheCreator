@@ -107,7 +107,7 @@ O projeto está organizado da seguinte forma:
      *  `RitmoMedio.cpp`: Implementa a classe `RitmoMedio`.
     *   `Tempo.cpp`: Implementa a classe `Tempo`.
      *  `TempoMedio.cpp`: Implementa a classe `TempoMedio`.
-    *   `mainTheCreator.cpp` (ou `main.cpp`): Arquivo principal do sistema.
+    *   `TheCreator.cpp` (ou `main.cpp`): Arquivo principal do sistema.
     *   `Usuario.cpp`: Implementa a classe `Usuario`.
 
 ## Notas Adicionais
