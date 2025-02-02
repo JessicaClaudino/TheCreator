@@ -1,11 +1,13 @@
-#pragma once 
-#include <vector> 
-#include <set> 
-#include "Musica.h" // Usando Musica.h para ter acesso a classe Musica
+#ifndef NUMEROIDIOMAS_H
+#define NUMEROIDIOMAS_H
 
-using namespace std; 
+#include <vector>
+#include <set>
+#include "Musica.h"
 
-class NumeroIdioma { 
-public: 
-    int calcularNumeroIdioma(const vector<Musica>& musicas); // Função que calcula o número de idiomas
+class NumeroIdiomas {
+public:
+    int calcularNumeroIdiomas(const std::vector<Musica*>& musicas) const;
 };
+
+#endif
