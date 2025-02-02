@@ -1,8 +1,11 @@
-#include "tempo.h"
-#include <iomanip>
-#include <sstream>
+#include "Tempo.h"
+#include <stdexcept>
+#include <sstream> // Para usar stringstream
 
 Tempo::Tempo(int minutos, int segundos) {
+    if (minutos < 0 || segundos < 0 || segundos > 59) {
+        throw std::invalid_argument("Invalid time values");
+    }
     this->minutos = minutos;
     this->segundos = segundos;
 }
@@ -18,23 +21,34 @@ int Tempo::getSegundos() const {
 }
 
 void Tempo::setMinutos(int minutos) {
+    if (minutos < 0) {
+        throw std::invalid_argument("Invalid minute value");
+    }
     this->minutos = minutos;
 }
 
 void Tempo::setSegundos(int segundos) {
+    if (segundos < 0 || segundos > 59) {
+        throw std::invalid_argument("Invalid second value");
+    }
     this->segundos = segundos;
 }
 
-string Tempo::toString() const {
-    stringstream ss;
-    ss << minutos << ":" << setw(2) << setfill('0') << segundos;
+std::string Tempo::toString() const {
+    std::stringstream ss;
+    ss << std::setfill('0') << std::setw(2) << minutos << ":" << std::setfill('0') << std::setw(2) << segundos;
     return ss.str();
 }
 
 bool Tempo::operator<(const Tempo& other) const {
-    return (minutos * 60 + segundos) < (other.minutos * 60 + other.segundos);
+    if (minutos < other.minutos) {
+        return true;
+    } else if (minutos == other.minutos) {
+        return segundos < other.segundos;
+    }
+    return false;
 }
 
 bool Tempo::operator==(const Tempo& other) const {
-    return (minutos == other.minutos) && (segundos == other.segundos);
+    return minutos == other.minutos && segundos == other.segundos;
 }
