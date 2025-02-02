@@ -2,13 +2,13 @@
 
 ## Descrição
 
-"The Creator" é um sistema de análise de consumo musical desenvolvido em C++ que permite aos usuários inserir suas músicas favoritas e analisar dados como o número de gêneros, artistas e idiomas distintos, além do ritmo e tempo médio das músicas. O sistema interage com o usuário via terminal, solicitando informações sobre as músicas e exibindo os resultados. Este projeto demonstra conceitos de programação orientada a objetos e interação com o usuário.
+"The Creator" é um sistema de análise de consumo musical desenvolvido em C++ que permite aos usuários inserir suas músicas favoritas e analisar dados como o número de gêneros, artistas e idiomas distintos, além do ritmo e tempo médio das músicas. O sistema interage com o usuário via terminal, solicitando informações sobre as músicas, lendo dados de um arquivo CSV (se existente), exibindo os resultados e salvando dados em um arquivo CSV. Este projeto demonstra conceitos de programação orientada a objetos, interação com o usuário e persistência de dados.
 
 ## Diagrama UML
 
 O diagrama UML do sistema está disponível no arquivo `_UML_diagrama_.png`. Ele mostra as seguintes classes principais:
 
-*   **`Usuario`**: Representa um usuário do sistema, com um nome e uma lista de músicas favoritas.
+*   **`Usuario`**: Representa um usuário do sistema, com um nome.
 *   **`Musica`**: Representa uma música, com atributos como nome, artista, gênero, ritmo (BPM), idioma e tempo.
 *   **`Artista`**: Representa o artista da música.
 *   **`Ritmo`**: Representa o ritmo da música em BPM.
@@ -20,7 +20,8 @@ O diagrama UML do sistema está disponível no arquivo `_UML_diagrama_.png`. Ele
 *   **`TempoMedio`**: Classe responsável por calcular o tempo médio das músicas.
 *   **`NumeroIdiomas`**: Classe responsável por calcular o número de idiomas diferentes.
 *   **`NumeroGeneros`**: Classe responsável por calcular o número de gêneros diferentes.
-*   **`InterfaceUsuario`**: Classe responsável pela interação com o usuário (exibição de menus, leitura de dados).
+*   **`InterfaceUsuario`**: Classe responsável pela interação com o usuário (exibição de menus, leitura de dados)
+*  **`GerenciadorCSV`**: Classe responsável pela leitura e escrita de dados em arquivos CSV.
 
 O diagrama também mostra as relações entre as classes, indicando como elas se associam e colaboram para realizar as funcionalidades do sistema.
 
@@ -43,7 +44,7 @@ Para executar o sistema "The Creator" no terminal, siga os passos abaixo:
     ```bash
     g++ *.cpp -o TheCreator
     ```
-    Este comando irá compilar todos os arquivos `.cpp` do diretório atual e gerar um executável chamado `TheCReator`.
+    Este comando irá compilar todos os arquivos `.cpp` do diretório atual e gerar um executável chamado `TheCreator`.
 
 ### 3. Execução
 
@@ -55,25 +56,26 @@ Para executar o sistema "The Creator" no terminal, siga os passos abaixo:
 
 ### 4. Interação com o Sistema
 
-1.  O sistema irá apresentar uma mensagem de boas-vindas e solicitar que você insira o seu nome.
-2.  Em seguida, o sistema irá pedir para você inserir o nome de três músicas, uma a uma. Para cada música, você deverá fornecer:
+1.  **Boas-vindas e Nome:** O sistema irá apresentar uma mensagem de boas-vindas e solicitar que você insira o seu nome.
+2.  **Arquivo `musicas.csv`:** O sistema irá procurar um arquivo `musicas.csv` no mesmo diretório do executável. Se o arquivo existir, as músicas nele contidas serão carregadas. Caso contrário, um novo arquivo `musicas.csv` será criado ao final da execução com as novas músicas inseridas. Por favor, certifique-se de que o arquivo `musicas.csv` (se existir) está corretamente formatado.
+3.  **Entrada de Músicas:** Em seguida, o sistema irá pedir para você inserir o nome de três músicas, uma a uma. Para cada música, você deverá fornecer:
     *   O nome da música.
     *   O nome do artista.
-     *   O gênero da música.
+    *   O gênero da música.
     *   O BPM da música.
     *   O idioma da música.
     *   O tempo da música (no formato "min:seg").
-3.  Após inserir as músicas, o sistema irá apresentar um menu com as seguintes opções:
+4.  **Menu de Opções:** Após inserir as músicas, o sistema irá apresentar um menu com as seguintes opções:
     *   `1. Ver número de gêneros diferentes`
     *   `2. Ver número de artistas diferentes`
     *   `3. Ver ritmo médio das músicas`
-    *  `4. Ver tempo médio das músicas`
-    *  `5. Ver número de idiomas diferentes`
-    *  `6. Ver todas as opções`
+    *   `4. Ver tempo médio das músicas`
+    *   `5. Ver número de idiomas diferentes`
+    *   `6. Ver todas as opções`
     *   `0. Sair`
-4.  Digite o número da(s) opção(ões) desejada(s), separadas por espaço e pressione `Enter`. Você pode selecionar várias opções de uma vez. Digite `0` para sair.
-5.  O sistema exibirá os resultados de acordo com as opções selecionadas, juntamente com o seu nome.
-6.  Para sair do sistema, digite `0`.
+5.  **Escolha de Opções:** Digite o número da(s) opção(ões) desejada(s), separadas por espaço e pressione `Enter`. Você pode selecionar várias opções de uma vez. Digite `0` para sair.
+6.  **Resultados:** O sistema exibirá os resultados de acordo com as opções selecionadas.
+7.  **Mensagem Final:** Ao sair do programa, será exibida uma mensagem de agradecimento com o seu nome.
 
 ## Estrutura do Projeto
 
@@ -86,10 +88,11 @@ O projeto está organizado da seguinte forma:
     *   `Musica.h`: Define a classe `Musica`.
     *   `NumeroArtistas.h`: Define a classe `NumeroArtistas`.
     *   `NumeroGeneros.h`: Define a classe `NumeroGeneros`.
-     *   `NumeroIdiomas.h`: Define a classe `NumeroIdiomas`.
+    *   `NumeroIdiomas.h`: Define a classe `NumeroIdiomas`.
     *   `InterfaceUsuario.h`: Define a classe `InterfaceUsuario`.
-     *   `Ritmo.h`: Define a classe `Ritmo`.
-    *  `RitmoMedio.h`: Define a classe `RitmoMedio`.
+     *  `GerenciadorCSV.h`: Define a classe `GerenciadorCSV`.
+    *   `Ritmo.h`: Define a classe `Ritmo`.
+    *   `RitmoMedio.h`: Define a classe `RitmoMedio`.
     *   `Tempo.h`: Define a classe `Tempo`.
     *   `TempoMedio.h`: Define a classe `TempoMedio`.
     *   `Usuario.h`: Define a classe `Usuario`.
@@ -103,10 +106,11 @@ O projeto está organizado da seguinte forma:
     *   `NumeroGeneros.cpp`: Implementa a classe `NumeroGeneros`.
     *    `NumeroIdiomas.cpp`: Implementa a classe `NumeroIdiomas`.
     *   `InterfaceUsuario.cpp`: Implementa a classe `InterfaceUsuario`.
-    *  `Ritmo.cpp`: Implementa a classe `Ritmo`.
-     *  `RitmoMedio.cpp`: Implementa a classe `RitmoMedio`.
+    * `GerenciadorCSV.cpp`: Implementa a classe `GerenciadorCSV`.
+    *   `Ritmo.cpp`: Implementa a classe `Ritmo`.
+    *   `RitmoMedio.cpp`: Implementa a classe `RitmoMedio`.
     *   `Tempo.cpp`: Implementa a classe `Tempo`.
-     *  `TempoMedio.cpp`: Implementa a classe `TempoMedio`.
+    *   `TempoMedio.cpp`: Implementa a classe `TempoMedio`.
     *   `TheCreator.cpp` (ou `main.cpp`): Arquivo principal do sistema.
     *   `Usuario.cpp`: Implementa a classe `Usuario`.
 
@@ -134,5 +138,3 @@ Durante o desenvolvimento inicial, foi considerado o uso de arquivos JSON para p
 ## Autores
 
 Jéssica Claudino, Sofia Braga, Kayky Braga, Helena Galego, Guilherme Vargas
-
-
