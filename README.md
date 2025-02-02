@@ -2,17 +2,13 @@
 
 ## Descrição
 
-"The Creator" é um sistema de análise de consumo musical desenvolvido em C++ que permite aos usuários inserir suas músicas favoritas e analisar dados como o número de gêneros, artistas e idiomas distintos, além do ritmo e tempo médio das músicas. O sistema interage com o usuário via terminal, solicitando informações sobre as músicas, lendo dados de um arquivo CSV (se existente), exibindo os resultados e salvando dados em um arquivo CSV. Este projeto demonstra conceitos de programação orientada a objetos, interação com o usuário e persistência de dados.
-
-## Diagrama UML
-
-O diagrama UML do sistema está disponível no arquivo `_UML_diagrama_.png`. Ele mostra as seguintes classes principais:
+"The Creator" é um sistema de análise de consumo musical desenvolvido em C++ que permite aos usuários inserir suas músicas favoritas e analisar dados como o número de gêneros, artistas e idiomas distintos, além do ritmo e tempo médio das músicas. O sistema interage com o usuário via terminal, solicitando informações sobre as músicas, lendo dados de um arquivo CSV (se existente), exibindo os resultados e salvando dados em um arquivo CSV. Este projeto demonstra conceitos de programação orientada a objetos, interação com o usuário e persistência de dados. As principais classes do sistema incluem:
 
 *   **`Usuario`**: Representa um usuário do sistema, com um nome.
 *   **`Musica`**: Representa uma música, com atributos como nome, artista, gênero, ritmo (BPM), idioma e tempo.
 *   **`Artista`**: Representa o artista da música.
 *   **`Ritmo`**: Representa o ritmo da música em BPM.
-*    **`Tempo`**: Representa o tempo de duração da música.
+*   **`Tempo`**: Representa o tempo de duração da música.
 *   **`Idioma`**: Representa o idioma da música.
 *   **`Genero`**: Representa o gênero da música.
 *   **`NumeroArtistas`**: Classe responsável por calcular o número de artistas diferentes.
@@ -20,12 +16,33 @@ O diagrama UML do sistema está disponível no arquivo `_UML_diagrama_.png`. Ele
 *   **`TempoMedio`**: Classe responsável por calcular o tempo médio das músicas.
 *   **`NumeroIdiomas`**: Classe responsável por calcular o número de idiomas diferentes.
 *   **`NumeroGeneros`**: Classe responsável por calcular o número de gêneros diferentes.
-*   **`InterfaceUsuario`**: Classe responsável pela interação com o usuário (exibição de menus, leitura de dados)
-*  **`GerenciadorCSV`**: Classe responsável pela leitura e escrita de dados em arquivos CSV.
+*   **`InterfaceUsuario`**: Classe responsável pela interação com o usuário (exibição de menus, leitura de dados).
+*   **`GerenciadorCSV`**: Classe responsável pela leitura e escrita de dados em arquivos CSV.
+*   **`main` (em `main.cpp`)**: Arquivo principal do sistema.
 
-O diagrama também mostra as relações entre as classes, indicando como elas se associam e colaboram para realizar as funcionalidades do sistema.
+O sistema utiliza o paradigma de programação orientada a objetos, facilitando a organização, a manutenção e a reutilização do código. O projeto também demonstra como interagir com o usuário via terminal, solicitar informações e exibir resultados.
+
+O diagrama UML do sistema está disponível no arquivo `_UML_diagrama_.png`. Ele mostra as relações entre as classes, indicando como elas se associam e colaboram para realizar as funcionalidades do sistema.
 
 ![Diagrama UML](_UML_diagrama_.png)
+
+## Lógica das Funções Principais
+
+* **`Musica`:**
+    * **`toCSVString()`:** Converte os dados de uma música para uma string formatada em CSV.
+    *   **`fromCSVString()`:** Cria um objeto `Musica` a partir de uma string CSV.
+*   **`GerenciadorCSV`:**
+    *   **`carregarMusicas()`:** Lê dados de um arquivo CSV e cria objetos `Musica`.
+    *   **`salvarMusicas()`:** Escreve dados de objetos `Musica` em um arquivo CSV.
+*   **`InterfaceUsuario`:**
+    *   **`carregarMusicasDeCSV()`:** Utiliza a classe `GerenciadorCSV` para ler dados de um arquivo CSV para o programa.
+    *   **`salvarMusicasEmCSV()`:** Utiliza a classe `GerenciadorCSV` para salvar os dados no arquivo CSV.
+    *   **`exibirInformacoes()`:** Exibe os resultados das análises (número de gêneros, artistas, etc) através dos métodos das classes `NumeroGeneros`, `NumeroArtistas`, `RitmoMedio`, `TempoMedio` e `NumeroIdiomas`.
+    * **`getNumeroGeneros`, `getNumeroArtistas`, `getRitmoMedio`, `getTempoMedio`, `getNumeroIdiomas`:** Permitem acesso aos dados das análises.
+*   **`NumeroGeneros`, `NumeroArtistas`, `NumeroIdiomas`:**
+    *   **`calcularNumeroGeneros()`, `calcularNumeroArtistas()`, `calcularNumeroIdiomas()`:** Calculam o número de gêneros, artistas e idiomas distintos, respetivamente, com base nos dados das músicas.
+*    **`RitmoMedio`, `TempoMedio`:**
+     *   **`calcularRitmoMedio()`, `calcularTempoMedio()`:** Calculam o ritmo e tempo médios com base nos dados das músicas.
 
 ## Como Executar o Sistema
 
@@ -42,17 +59,17 @@ Para executar o sistema "The Creator" no terminal, siga os passos abaixo:
 2.  Navegue até a pasta raiz do projeto.
 3.  Compile o código usando o seguinte comando:
     ```bash
-    g++ *.cpp -o TheCreator
+    g++ *.cpp -o main
     ```
-    Este comando irá compilar todos os arquivos `.cpp` do diretório atual e gerar um executável chamado `TheCreator`.
+    Este comando irá compilar todos os arquivos `.cpp` do diretório atual e gerar um executável chamado `main`.
 
 ### 3. Execução
 
 1.  Após a compilação, execute o programa com o comando:
     ```bash
-    ./TheCreator
+    ./main
     ```
-    (No Windows, use `TheCreator.exe`)
+    (No Windows, use `main.exe`)
 
 ### 4. Interação com o Sistema
 
@@ -90,7 +107,7 @@ O projeto está organizado da seguinte forma:
     *   `NumeroGeneros.h`: Define a classe `NumeroGeneros`.
     *   `NumeroIdiomas.h`: Define a classe `NumeroIdiomas`.
     *   `InterfaceUsuario.h`: Define a classe `InterfaceUsuario`.
-     *  `GerenciadorCSV.h`: Define a classe `GerenciadorCSV`.
+        *   `GerenciadorCSV.h`: Define a classe `GerenciadorCSV`.
     *   `Ritmo.h`: Define a classe `Ritmo`.
     *   `RitmoMedio.h`: Define a classe `RitmoMedio`.
     *   `Tempo.h`: Define a classe `Tempo`.
@@ -98,27 +115,27 @@ O projeto está organizado da seguinte forma:
     *   `Usuario.h`: Define a classe `Usuario`.
 
 *   **Arquivos de implementação (.cpp):**
-    *    `Artista.cpp`: Implementa a classe `Artista`.
+    *   `Artista.cpp`: Implementa a classe `Artista`.
     *   `Genero.cpp`: Implementa a classe `Genero`.
     *   `Idioma.cpp`: Implementa a classe `Idioma`.
     *   `Musica.cpp`: Implementa a classe `Musica`.
     *   `NumeroArtistas.cpp`: Implementa a classe `NumeroArtistas`.
     *   `NumeroGeneros.cpp`: Implementa a classe `NumeroGeneros`.
-    *    `NumeroIdiomas.cpp`: Implementa a classe `NumeroIdiomas`.
+    *   `NumeroIdiomas.cpp`: Implementa a classe `NumeroIdiomas`.
     *   `InterfaceUsuario.cpp`: Implementa a classe `InterfaceUsuario`.
-    * `GerenciadorCSV.cpp`: Implementa a classe `GerenciadorCSV`.
+        * `GerenciadorCSV.cpp`: Implementa a classe `GerenciadorCSV`.
     *   `Ritmo.cpp`: Implementa a classe `Ritmo`.
     *   `RitmoMedio.cpp`: Implementa a classe `RitmoMedio`.
     *   `Tempo.cpp`: Implementa a classe `Tempo`.
     *   `TempoMedio.cpp`: Implementa a classe `TempoMedio`.
-    *   `TheCreator.cpp` (ou `main.cpp`): Arquivo principal do sistema.
+    *   `main.cpp`: Arquivo principal do sistema.
     *   `Usuario.cpp`: Implementa a classe `Usuario`.
 
 ## Notas Adicionais
 
-  * Sobre o sistema "The Creator"
+* Sobre o sistema "The Creator"
 
-O sistema  foi desenvolvido com uma abordagem que priorizou a organização do código e a criação de um sistema que fosse, simultaneamente, simples e prático para o usuário final. A arquitetura do sistema foi concebida para facilitar o entendimento e a manutenção do código, utilizando princípios de programação orientada a objetos que promovem a modularidade e o reuso de componentes.
+O sistema foi desenvolvido com uma abordagem que priorizou a organização do código e a criação de um sistema que fosse, simultaneamente, simples e prático para o usuário final. A arquitetura do sistema foi concebida para facilitar o entendimento e a manutenção do código, utilizando princípios de programação orientada a objetos que promovem a modularidade e o reuso de componentes.
 
  * Simplicidade e Praticidade para o Usuário:
 
@@ -133,8 +150,9 @@ Memória Mais Eficiente: A arquitetura modular do sistema permite que futurament
 Integração com APIs de Streaming: O design do sistema considera a possibilidade de integrações com APIs de serviços de streaming no futuro. Uma nova camada de abstração pode ser adicionada para lidar com a comunicação com as APIs, permitindo que o sistema obtenha dados diretamente de plataformas como Spotify ou Apple Music. Desta forma, as classes de análise poderão trabalhar com os dados fornecidos por essas APIs, enriquecendo a experiência do usuário. A classe InterfaceUsuario foi pensada para permitir a fácil adição de novos menus e opções.
 
 * Impasses
-  
+
 Durante o desenvolvimento inicial, foi considerado o uso de arquivos JSON para persistência de dados, de forma a permitir que o sistema pudesse guardar as músicas inseridas pelo usuário. No entanto, a complexidade da manipulação de arquivos JSON e da sua integração com as classes existentes, dentro do tempo limitado para o projeto, representou um obstáculo inicial. Como o principal foco do projeto era demonstrar a interação do usuário e a análise de dados, a decisão foi adiar a implementação do JSON para uma futura versão. Apesar disso, o uso de JSON se mostrou uma opção viável e muito interessante para persistência de dados e para garantir a interoperabilidade com outras aplicações. Desta forma, será uma das principais melhorias do sistema nas futuras iterações.
+
 ## Autores
 
 Jéssica Claudino, Sofia Braga, Kayky Braga, Helena Galego, Guilherme Vargas
