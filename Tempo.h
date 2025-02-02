@@ -1,7 +1,5 @@
 #pragma once
-#include <iostream>
 #include <string>
-#include <stdexcept>
 
 class Tempo {
 private:
@@ -9,17 +7,10 @@ private:
     int segundos;
 
 public:
+    Tempo();
     Tempo(int minutos, int segundos);
-    Tempo(); // Construtor padrão
-
+     Tempo(const std::string& tempoStr); // Novo construtor
     int getMinutos() const;
     int getSegundos() const;
-
-    void setMinutos(int minutos);
-    void setSegundos(int segundos);
-    
-    std::string toString() const;
-
-    bool operator<(const Tempo& other) const;
-    bool operator==(const Tempo& other) const;
+    std::string getTempoStr() const; // Novo método
 };
