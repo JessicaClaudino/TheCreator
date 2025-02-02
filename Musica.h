@@ -1,39 +1,27 @@
-#pragma once
-#include <string>
-#include "Genero.h" // Incluir Genero.h
-#include "Artista.h" // Incluir Artista.h
+#include "Idioma.h"
+#include "Tempo.h"
+
 using namespace std;
 
 class Musica {
-public:
+private:
     string nome;
-    Artista artista;
-    Genero genero; // usar Genero como tipo
-    int bpm;
-    string idioma;
-    string tempo;
+    Artista* artista;
+    Genero* genero;
+    Ritmo* ritmo;
+    Idioma* idioma;
+     Tempo* tempo;
 
-    Musica(string nome, Artista artista, Genero genero, int bpm, string idioma, string tempo);
+public:
     Musica() = default;
-
+    Musica(string nome, Artista* artista, Genero* genero, Ritmo* ritmo, Idioma* idioma, Tempo* tempo);
+   
     string getNome() const;
-    void setNome(const string& nome);
-
-    Artista getArtista() const;
-    void setArtista(const Artista& artista);
-
-    Genero getGenero() const; //retorna um objeto Generos
-    void setGenero(const Genero& genero); //recebe um objeto Genero
-
-    int getBpm() const;
-    void setBpm(int bpm);
-
-    string getIdioma() const;
-    void setIdioma(const string& idioma);
-
-    string getTempo() const;
-    void setTempo(const string& tempo);
-    
-    bool operator<(const Musica& other) const;
-    bool operator==(const Musica& other) const;
+    Artista* getArtista() const;
+     Genero* getGenero() const;
+    Ritmo* getRitmo() const;
+    Idioma* getIdioma() const;
+     Tempo* getTempo() const;
 };
+
+#endif
