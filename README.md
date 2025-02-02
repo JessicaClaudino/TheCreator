@@ -50,9 +50,9 @@ Para executar o sistema "The Creator" no terminal, siga os passos abaixo:
 
 ### 1. Pré-requisitos
 
-*   **Compilador C++:** Certifique-se de ter um compilador C++ instalado (como g++ ou clang++).
+*   **Compilador C++ 14:** Certifique-se de ter um compilador C++14 instalado (como g++ ou clang++).
 *   **Sistema Operacional:** O sistema foi desenvolvido e testado em ambientes Linux e Windows, mas deve funcionar em outros sistemas Unix.
-
+*   
 ### 2. Compilação
 
 1.  Abra o terminal.
