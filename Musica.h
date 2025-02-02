@@ -1,39 +1,42 @@
 #pragma once
 #include <string>
-#include "Genero.h" // Incluir Genero.h
-
-using namespace std;
+#include "Genero.h"
+#include "Ritmo.h"
+#include "Idioma.h"
+#include "Tempo.h"
+#include "Artista.h"
 
 class Musica {
-public:
-    string nome;
-    string artista;
-    Genero genero; // usar Genero como tipo
-    int bpm;
-    string idioma;
-    string tempo;
+private:
+    std::string nome;
+    Artista artista;
+    Genero genero;
+    Ritmo ritmo;
+    Idioma idioma;
+    Tempo tempo;
 
-    Musica(string nome, string artista, Genero genero, int bpm, string idioma, string tempo);
+public:
+    Musica(std::string nome, Artista artista, Genero genero, Ritmo ritmo, Idioma idioma, Tempo tempo);
     Musica() = default;
 
-    string getNome() const;
-    void setNome(const string& nome);
+    std::string getNome() const;
+    void setNome(const std::string& nome);
 
-    string getArtista() const;
-    void setArtista(const string& artista);
+    Artista getArtista() const;
+    void setArtista(const Artista& artista);
 
-    Genero getGenero() const; //retorna um objeto Genero
-    void setGenero(const Genero& genero); //recebe um objeto Genero
-
-    int getBpm() const;
-    void setBpm(int bpm);
-
-    string getIdioma() const;
-    void setIdioma(const string& idioma);
-
-    string getTempo() const;
-    void setTempo(const string& tempo);
+    Genero getGenero() const;
+    void setGenero(const Genero& genero);
     
+     Ritmo getRitmo() const;
+    void setRitmo(const Ritmo& ritmo);
+
+    Idioma getIdioma() const;
+    void setIdioma(const Idioma& idioma);
+
+    Tempo getTempo() const;
+    void setTempo(const Tempo& tempo);
+
     bool operator<(const Musica& other) const;
     bool operator==(const Musica& other) const;
 };
