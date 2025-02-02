@@ -1,59 +1,110 @@
+#include "InterfaceUsuario.h"
+#include "Musica.h"
+#include "Usuario.h"
+#include "Artista.h"
+#include "Genero.h"
+#include "Idioma.h"
+#include "Ritmo.h"
+#include "Tempo.h"
 #include <iostream>
 #include <vector>
 #include <sstream>
-#include <algorithm>
-#include "InterfaceUsuario.h"
-#include "Usuario.h"
-#include "Musica.h"
 
 int main() {
-    InterfaceUsuario interface;
+    InterfaceUsuario interfaceUsuario;
+    std::string nomeUsuario;
 
-     // Mensagem de boas-vindas
-    std::cout << "Seja Bem-Vindo ao sistema TheCreator, um sistema de analise de consumo musical." << std::endl;
-    
-    // 1. Obter o nome do usuário
-    std::string nomeUsuario = interface.obterNomeUsuario();
+    std::cout << "Bem-vindo ao The Creator! Seu gerenciador de consumo musical" << std::endl;
+    std::cout << "Insira seu nome: ";
+    std::getline(std::cin, nomeUsuario);
+
     Usuario usuario(nomeUsuario);
+    std::cout << "Olá " << usuario.getNome() << "!" << std::endl;
 
-     // Mensagem de solicitação das músicas favoritas
-    std::cout << "Agora vamos as suas musicas favoritas." << std::endl;
+    std::cout << "\nO programa ira procurar um arquivo 'musicas.csv' no mesmo diretório do executavel." << std::endl;
+    std::cout << "Se o arquivo existir, as musicas nele contidas serão carregadas." << std::endl;
+    std::cout << "Caso contrário, um novo arquivo 'musicas.csv' será criado ao final da execucaoo com as novas musicas inseridas." << std::endl;
+    std::cout << "Por favor, certifique-se de que o arquivo 'musicas.csv' (se existir) está corretamente formatado." << std::endl;
 
-    // 2. Obter músicas favoritas do usuário
-    std::vector<Musica*> musicas = interface.obterMusicas(3);
-    usuario.setMusicasFavoritas(musicas);
+    interfaceUsuario.carregarMusicasDeCSV("musicas.csv");
+     std::cout << "\nAgora, insira os dados de três músicas:" << std::endl;
+    for (int i = 0; i < 3; ++i) {
+        std::string nomeMusica, nomeArtista, nomeGenero, nomeIdioma, ritmoStr, tempoStr;
+        std::cout << "\n--- Musica " << i + 1 << " ---" << std::endl;
+        std::cout << "Insira o nome da música: ";
+        std::getline(std::cin, nomeMusica);
 
+        std::cout << "Insira o nome do artista: ";
+        std::getline(std::cin, nomeArtista);
 
-    // 3. Exibir o menu e obter as opções do usuário
-    int opcao;
-    std::string input;
-    std::vector<int> opcoes;
+        std::cout << "Insira o gênero da música: ";
+        std::getline(std::cin, nomeGenero);
 
+        std::cout << "Insira o ritmo da música (BPM): ";
+        std::getline(std::cin, ritmoStr);
+
+        std::cout << "Insira o idioma da música: ";
+        std::getline(std::cin, nomeIdioma);
+
+        std::cout << "Insira o tempo da música (min:seg): ";
+        std::getline(std::cin, tempoStr);
+
+        Artista* artista = new Artista(nomeArtista);
+        Genero* genero = new Genero(nomeGenero);
+        Idioma* idioma = new Idioma(nomeIdioma);
+        Ritmo* ritmo = new Ritmo(std::stoi(ritmoStr));
+        Tempo* tempo = new Tempo(tempoStr);
+
+        Musica* musica = new Musica(nomeMusica, artista, genero, ritmo, idioma, tempo);
+        interfaceUsuario.adicionarMusica(musica);
+    }
+    int escolha;
     do {
-        interface.exibirMenu();
-        std::getline(std::cin >> std::ws, input); // Lê a linha inteira
+         std::cout << "\n--- Menu de Opções ---" << std::endl;
+        std::cout << "Escolha uma ou mais opções separadas por espaço (ex: '1 3 5') e pressione Enter:" << std::endl;
+        std::cout << "1. Ver número de gêneros diferentes" << std::endl;
+        std::cout << "2. Ver número de artistas diferentes" << std::endl;
+        std::cout << "3. Ver ritmo médio das músicas" << std::endl;
+        std::cout << "4. Ver tempo médio das músicas" << std::endl;
+        std::cout << "5. Ver número de idiomas diferentes" << std::endl;
+        std::cout << "6. Ver todas as opções" << std::endl;
+        std::cout << "0. Sair" << std::endl;
+        std::cout << "Opção(ões): ";
 
-        std::istringstream iss(input);
-        opcoes.clear(); // Limpa as opções anteriores
-        while (iss >> opcao) {
-            opcoes.push_back(opcao);
+        std::string input;
+        std::getline(std::cin, input);
+        std::stringstream ss(input);
+        while (ss >> escolha) {
+            switch (escolha) {
+            case 1:
+                std::cout << "Número de gêneros diferentes: " << interfaceUsuario.getNumeroGeneros() << std::endl;
+                break;
+            case 2:
+                std::cout << "Número de artistas diferentes: " << interfaceUsuario.getNumeroArtistas() << std::endl;
+                break;
+            case 3:
+                std::cout << "Ritmo médio das músicas: " << interfaceUsuario.getRitmoMedio() << std::endl;
+                break;
+            case 4:
+                std::cout << "Tempo médio das músicas: " << interfaceUsuario.getTempoMedio() << std::endl;
+                break;
+            case 5:
+                std::cout << "Número de idiomas diferentes: " << interfaceUsuario.getNumeroIdiomas() << std::endl;
+                break;
+            case 6:
+                interfaceUsuario.exibirInformacoes();
+                break;
+            case 0:
+                std::cout << "Saindo do programa..." << std::endl;
+                break;
+            default:
+                std::cout << "Opção inválida." << std::endl;
+            }
         }
 
-      interface.executarOpcao(opcoes, usuario);
-    } while (std::find(opcoes.begin(), opcoes.end(), 0) == opcoes.end());
+    } while (escolha != 0);
 
-    // Mensagem de agradecimento
-    std::cout << "Obrigado por usar o TheCreator!" << std::endl;
-
-    // 4. Liberar a memória alocada
-    for (Musica* musica : musicas) {
-        delete musica->getArtista();
-       delete musica->getGenero();
-        delete musica->getRitmo();
-       delete musica->getIdioma();
-        delete musica->getTempo();
-        delete musica;
-    }
-
+    interfaceUsuario.salvarMusicasEmCSV("musicas.csv");
+    std::cout << "\nObrigado por usar o The Creator, " << usuario.getNome() << "!" << std::endl;
     return 0;
 }
