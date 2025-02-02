@@ -1,8 +1,8 @@
 #pragma once
-#include "Artista.h"
 #include <vector>
+#include "Musica.h"
 
 class NumeroArtistas {
 public:
-    int calcularNumeroArtistas(const std::vector<Musica*> &musicas);
+    int calcularNumeroArtistas(const std::vector<Musica*>& musicas) const;
 };
