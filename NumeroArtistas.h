@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <set>
-#include "Musica.h" // Inclui Musica.h, pois NumeroArtistas precisa de Musica
+#include "Musica.h" // Usando Musica.h direto
 
 using namespace std;
 
