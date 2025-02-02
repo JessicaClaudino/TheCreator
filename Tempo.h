@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include <stdexcept> // aqui pra poder usar excessoes 
+#include <stdexcept>
 
 class Tempo {
 private:
