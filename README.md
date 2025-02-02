@@ -69,6 +69,7 @@ Para executar o sistema "The Creator" no terminal, siga os passos abaixo:
     *   `3. Ver ritmo médio das músicas`
     *  `4. Ver tempo médio das músicas`
     *  `5. Ver número de idiomas diferentes`
+    *  `6. Ver todas as opções`
     *   `0. Sair`
 4.  Digite o número da(s) opção(ões) desejada(s), separadas por espaço e pressione `Enter`. Você pode selecionar várias opções de uma vez. Digite `0` para sair.
 5.  O sistema exibirá os resultados de acordo com as opções selecionadas, juntamente com o seu nome.
