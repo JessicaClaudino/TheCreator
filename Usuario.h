@@ -3,20 +3,20 @@
 
 #include <string>
 #include <vector>
-#include "Musica.h"
 
-using namespace std;
+class Musica;  // Declaração antecipada
 
 class Usuario {
 private:
-    string nome;
+    std::string nome;
     std::vector<Musica*> musicasFavoritas;
 
 public:
-    Usuario(string nome);
-    string getNome() const;
+    Usuario(std::string nome);
+    std::string getNome() const;
     void setMusicasFavoritas(const std::vector<Musica*>& musicas);
-     const std::vector<Musica*> &getMusicasFavoritas() const;
+    const std::vector<Musica*>& getMusicasFavoritas() const;
+    void adicionarMusica(Musica* musica);
 };
 
 #endif
