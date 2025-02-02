@@ -1,34 +1,37 @@
-#ifndef MUSICA_H
-#define MUSICA_H
-
+#pragma once
 #include <string>
 #include "Genero.h"
 #include "Artista.h"
-#include "Ritmo.h"
 #include "Idioma.h"
+#include "Ritmo.h"
 #include "Tempo.h"
 
-using namespace std;
-
 class Musica {
-private:
-    string nome;
+ private:
+    std::string nome;
     Artista* artista;
     Genero* genero;
     Ritmo* ritmo;
     Idioma* idioma;
-     Tempo* tempo;
+    Tempo* tempo;
 
-public:
+ public:
+    Musica(std::string nome, Artista* artista, Genero* genero, Ritmo* ritmo, Idioma* idioma, Tempo* tempo);
     Musica() = default;
-    Musica(string nome, Artista* artista, Genero* genero, Ritmo* ritmo, Idioma* idioma, Tempo* tempo);
-   
-    string getNome() const;
+     ~Musica();
+    std::string getNome() const;
+    void setNome(const std::string& nome);
     Artista* getArtista() const;
-     Genero* getGenero() const;
-    Ritmo* getRitmo() const;
-    Idioma* getIdioma() const;
-     Tempo* getTempo() const;
+    void setArtista(Artista* artista);
+    Genero* getGenero() const;
+    void setGenero(Genero* genero);
+     Ritmo* getRitmo() const;
+    void setRitmo(Ritmo* ritmo);
+     Idioma* getIdioma() const;
+    void setIdioma(Idioma* idioma);
+    Tempo* getTempo() const;
+    void setTempo(Tempo* tempo);
+    // Funções para CSV
+   std::string toCSVString() const;
+    static Musica fromCSVString(const std::string& csvLine);
 };
-
-#endif
