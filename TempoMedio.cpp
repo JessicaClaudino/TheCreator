@@ -1,15 +1,15 @@
 #include "TempoMedio.h"
+#include "Musica.h"
+#include <vector>
+#include <numeric>
 
-Tempo TempoMedio::calcularMedia(const vector<Tempo>& tempos) {
-    if (tempos.empty()) {
-        return Tempo(0, 0);
+double TempoMedio::calcular(const std::vector<Musica*>& musicas) {
+    if (musicas.empty()) {
+        return 0.0;
     }
-
-    int totalSegundos = 0;
-    for (const auto& tempo : tempos) {
-        totalSegundos += tempo.getMinutos() * 60 + tempo.getSegundos();
+    double soma = 0;
+     for (const Musica* musica : musicas) {
+        soma += std::stod(musica->getTempo()->toString());
     }
-
-    int mediaSegundos = totalSegundos / tempos.size();
-    return Tempo(mediaSegundos / 60, mediaSegundos % 60);
+    return soma / musicas.size();
 }
