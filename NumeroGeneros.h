@@ -1,12 +1,13 @@
-#pragma once
+#ifndef NUMEROGENEROS_H
+#define NUMEROGENEROS_H
+
 #include <vector>
 #include <set>
-#include "Musica.h" // Inclui Musica.h, pois NumeroGeneros precisa de Musica
-#include "Genero.h" // Inclui Genero.h, pois NumeroGeneros precisa de Genero
-
-using namespace std;
+#include "Musica.h"
 
 class NumeroGeneros {
 public:
-    int calcularNumeroGeneros(const vector<Musica>& musicas);
+    int calcularNumeroGeneros(const std::vector<Musica*>& musicas) const;
 };
+
+#endif
