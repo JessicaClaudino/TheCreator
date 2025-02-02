@@ -1,11 +1,8 @@
 #pragma once
+#include "Artista.h"
 #include <vector>
-#include <set>
-#include "Musica.h" // Usando Musica.h direto
-
-using namespace std;
 
 class NumeroArtistas {
 public:
-    int calcularNumeroArtistas(const vector<Musica>& musicas);
+    int calcularNumeroArtistas(const std::vector<Musica*> &musicas);
 };

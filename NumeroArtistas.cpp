@@ -1,13 +1,11 @@
 #include "NumeroArtistas.h"
+#include "Musica.h"
+#include <set>
 
-using namespace std;
-
-int NumeroArtistas::calcularNumeroArtistas(const vector<Musica>& musicas) {
-    set<string> artistasUnicos; // Usa set para garantir artistas únicos
-
-    for (const auto& musica : musicas) {
-        artistasUnicos.insert(musica.getArtista());
-    }
-
-    return static_cast<int>(artistasUnicos.size());
+int NumeroArtistas::calcularNumeroArtistas(const std::vector<Musica*>& musicas) {
+    std::set<std::string> artistasDistintos;
+        for (const Musica* musica : musicas) {
+           artistasDistintos.insert(musica->artista.getNome());
+        }
+     return artistasDistintos.size();
 }
