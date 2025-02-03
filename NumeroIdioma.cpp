@@ -1,4 +1,4 @@
-#include "NumeroIdiomas.h"
+#include "NumeroIdioma.h"
 #include <set>
 
 int NumeroIdiomas::calcularNumeroIdiomas(const std::vector<Musica*>& musicas) const {

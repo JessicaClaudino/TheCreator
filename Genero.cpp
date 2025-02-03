@@ -1,11 +1,12 @@
 #include "Genero.h"
+#include <iostream>
 
 using namespace std;
 
 Genero::Genero(string nome) : nome(nome) {}
 
 string Genero::getNome() const {
-    return nome;
+    return this->nome;
 }
 
 void Genero::setNome(const string& nome) {

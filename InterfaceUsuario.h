@@ -5,23 +5,23 @@
 #include "NumeroArtistas.h"
 #include "RitmoMedio.h"
 #include "TempoMedio.h"
-#include "NumeroIdiomas.h"
+#include "NumeroIdioma.h"
 #include "Musica.h"
 #include "GerenciadorCSV.h"
 #include <string>
 #include <vector>
 class InterfaceUsuario {
 public:
-  InterfaceUsuario();
+InterfaceUsuario();
   void exibirInformacoes();
   void adicionarMusica(Musica* musica);
- void carregarMusicasDeCSV(const std::string& filename);
- void salvarMusicasEmCSV(const std::string& filename);
+  bool carregarMusicasDeCSV(const std::string& filename);
+  void salvarMusicasEmCSV(const std::string& filename);
   int getNumeroGeneros() const;
-   int getNumeroArtistas() const;
-   double getRitmoMedio() const;
-   double getTempoMedio() const;
-   int getNumeroIdiomas() const;
+  int getNumeroArtistas() const;
+  double getRitmoMedio() const;
+  double getTempoMedio() const;
+  int getNumeroIdiomas() const;
 
 
 private:

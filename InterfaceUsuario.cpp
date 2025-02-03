@@ -4,14 +4,15 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <iomanip> // Necessário para std::setprecision
 
 InterfaceUsuario::InterfaceUsuario() {}
 
 void InterfaceUsuario::exibirInformacoes() {
     std::cout << "Número de gêneros diferentes: " << getNumeroGeneros() << std::endl;
     std::cout << "Número de artistas diferentes: " << getNumeroArtistas() << std::endl;
-    std::cout << "Ritmo médio das músicas: " << getRitmoMedio() << std::endl;
-    std::cout << "Tempo médio das músicas: " << getTempoMedio() << std::endl;
+    std::cout << "Ritmo médio das músicas: " << std::fixed << std::setprecision(2) << getRitmoMedio() << std::endl;
+    std::cout << "Tempo médio das músicas: " << std::fixed << std::setprecision(2) << getTempoMedio() << std::endl;
     std::cout << "Número de idiomas diferentes: " << getNumeroIdiomas() << std::endl;
 }
 
@@ -23,7 +24,7 @@ void InterfaceUsuario::salvarMusicasEmCSV(const std::string& filename) {
     GerenciadorCSV::salvarMusicas(musicas, filename);
 }
 
-void InterfaceUsuario::carregarMusicasDeCSV(const std::string& filename) {
+bool InterfaceUsuario::carregarMusicasDeCSV(const std::string& filename) {
     std::cout << "Tentando abrir arquivo: " << filename << std::endl;
     std::ifstream file(filename);
     if (file.is_open()) {
@@ -34,17 +35,20 @@ void InterfaceUsuario::carregarMusicasDeCSV(const std::string& filename) {
         while (std::getline(file, line)) {
             std::cout << "Lendo linha: " << line << std::endl;
             try {
-                Musica musica = Musica::fromCSVString(line);
-                adicionarMusica(new Musica(musica));
-           }
+                Musica* musica = new Musica(Musica::fromCSVString(line));
+                
+                adicionarMusica(musica);
+            }
             catch(const std::exception& e){
-                 std::cerr << "Erro ao ler musica do csv: " << e.what() << std::endl;
+                std::cerr << "Erro ao ler musica do csv: " << e.what() << std::endl;
             }
         }
         file.close();
         std::cout << "Músicas carregadas com sucesso de " << filename << std::endl;
+        return true;
     } else {
         std::cerr << "Erro ao abrir o arquivo para carregar: " << filename << std::endl;
+        return false;
     }
 }
 

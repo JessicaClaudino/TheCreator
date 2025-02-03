@@ -1,6 +1,7 @@
 #include "Musica.h"
 #include <sstream>
 #include <vector>
+#include <iostream>
 
 Musica::Musica(std::string nome, Artista* artista, Genero* genero, Ritmo* ritmo, Idioma* idioma, Tempo* tempo)
     : nome(nome), artista(artista), genero(genero), ritmo(ritmo), idioma(idioma), tempo(tempo) {}
@@ -71,14 +72,13 @@ Musica Musica::fromCSVString(const std::string& csvLine) {
     std::getline(ss, generoNome, ',');
     std::getline(ss, ritmoStr, ',');
     std::getline(ss, idiomaNome, ',');
-     std::getline(ss, tempoStr, ',');
+    std::getline(ss, tempoStr, ',');
 
-   Artista* artista = new Artista(artistaNome);
+    Artista* artista = new Artista(artistaNome);
     Genero* genero = new Genero(generoNome);
-   Idioma* idioma = new Idioma(idiomaNome);
+    Idioma* idioma = new Idioma(idiomaNome);
     Ritmo* ritmo = new Ritmo(std::stoi(ritmoStr));
-   Tempo* tempo = new Tempo(tempoStr);
-
+    Tempo* tempo = new Tempo(tempoStr);
 
     return Musica(nome, artista, genero, ritmo, idioma, tempo);
 }

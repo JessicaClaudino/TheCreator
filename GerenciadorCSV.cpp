@@ -25,12 +25,12 @@ std::vector<Musica*> GerenciadorCSV::carregarMusicas(const std::string& filename
 void GerenciadorCSV::salvarMusicas(const std::vector<Musica*>& musicas, const std::string& filename) {
     std::ofstream file(filename);
     if (file.is_open()) {
-       file << "Nome,Artista,Genero,Ritmo,Idioma,Tempo\n";
+        file << "Nome,Artista,Genero,Ritmo,Idioma,Tempo\n";
         for (const Musica* musica : musicas) {
             file << musica->toCSVString() << "\n";
         }
         file.close();
-       std::cout << "Músicas salvas em " << filename << std::endl;
+        std::cout << "Músicas salvas em " << filename << std::endl;
     } else {
         std::cerr << "Erro ao abrir o arquivo para salvar." << std::endl;
     }
